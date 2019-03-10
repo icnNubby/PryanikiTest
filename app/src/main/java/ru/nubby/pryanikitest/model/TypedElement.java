@@ -2,19 +2,19 @@ package ru.nubby.pryanikitest.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ViewType {
+public class TypedElement {
 
     @SerializedName("name")
-    private String name;
+    private Type name = null;
 
     @SerializedName("data")
     private Data data;
 
-    public String getName() {
+    public Type getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(Type name) {
         this.name = name;
     }
 

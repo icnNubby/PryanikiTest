@@ -40,12 +40,12 @@ ext {
             appcompat: "androidx.appcompat:appcompat:$support_version",
             design: "com.google.android.material:material:$design_version",
             constraint: "androidx.constraintlayout:constraintlayout:$constraint_version",
+            recyclerview: "androidx.recyclerview:recyclerview:$support_version",
             //net
             okhttp: "com.squareup.okhttp3:okhttp:$okhttp_version",
             okhttp_logging: "com.squareup.okhttp3:logging-interceptor:$okhttp_version",
             retrofit: "com.squareup.retrofit2:retrofit:$retrofit_version",
             retrofit_converter_gson: "com.squareup.retrofit2:converter-gson:$retrofit_version",
-            retrofit_converter_scalar: "com.squareup.retrofit2:converter-scalars:$retrofit_version",
             retrofit_rxjava_adapter: "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
             gson: "com.google.code.gson:gson:$gson_version",
             //rx

@@ -29,16 +29,16 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation dependencies.appcompat
     implementation dependencies.design
+    implementation dependencies.constraint
+    implementation dependencies.recyclerview
 
     implementation dependencies.okhttp
     implementation dependencies.okhttp_logging
-    implementation dependencies.constraint
     implementation dependencies.rxandroid
     implementation dependencies.rxjava
 
     implementation dependencies.retrofit
     implementation dependencies.retrofit_converter_gson
-    implementation dependencies.retrofit_converter_scalar
     implementation dependencies.retrofit_rxjava_adapter
     implementation dependencies.gson
     implementation dependencies.picasso

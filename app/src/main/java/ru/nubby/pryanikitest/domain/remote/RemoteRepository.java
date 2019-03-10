@@ -2,7 +2,7 @@ package ru.nubby.pryanikitest.domain.remote;
 
 import io.reactivex.Single;
 import ru.nubby.pryanikitest.domain.Repository;
-import ru.nubby.pryanikitest.model.ViewElementList;
+import ru.nubby.pryanikitest.model.BaseResponse;
 
 public class RemoteRepository implements Repository {
 
@@ -14,7 +14,7 @@ public class RemoteRepository implements Repository {
     }
 
     @Override
-    public Single<ViewElementList> getData() {
+    public Single<BaseResponse> getData() {
         return mRemoteApi
                 .getExampleService()
                 .getViewElements(TEST_DATA);

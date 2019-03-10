@@ -3,27 +3,27 @@ package ru.nubby.pryanikitest.model;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class ViewElementList {
+public class BaseResponse {
 
     @SerializedName("data")
-    private List<ViewType> data = null;
+    private List<TypedElement> data = null;
 
     @SerializedName("view")
-    private List<String> view = null;
+    private List<Type> view = null;
 
-    public List<ViewType> getData() {
+    public List<TypedElement> getData() {
         return data;
     }
 
-    public void setData(List<ViewType> data) {
+    public void setData(List<TypedElement> data) {
         this.data = data;
     }
 
-    public List<String> getView() {
+    public List<Type> getView() {
         return view;
     }
 
-    public void setView(List<String> view) {
+    public void setView(List<Type> view) {
         this.view = view;
     }
 
