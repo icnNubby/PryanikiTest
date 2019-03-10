@@ -3,6 +3,7 @@ package ru.nubby.pryanikitest.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Data {
@@ -18,6 +19,20 @@ public class Data {
 
     @SerializedName("variants")
     private List<Variant> variants = null;
+
+    public Data(Data data) {
+        if (data != null) {
+            this.text = data.getText();
+            this.url = data.getUrl();
+            this.selectedId = data.getSelectedId();
+            this.variants = new ArrayList<>();
+            if (data.getVariants() != null) {
+                for (Variant variant : data.getVariants()) {
+                    this.variants.add(new Variant(variant));
+                }
+            }
+        }
+    }
 
     public String getText() {
         return text;

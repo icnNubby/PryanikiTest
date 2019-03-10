@@ -23,9 +23,15 @@ public class PictureElementViewHolder extends BaseViewHolder {
 
     @Override
     public void setData(Data data) {
+        super.setData(data);
         mTextView.setText(data.getText());
         Picasso.get()
                 .load(data.getUrl())
                 .into(mImageView);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

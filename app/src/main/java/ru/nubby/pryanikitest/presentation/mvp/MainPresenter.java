@@ -3,7 +3,9 @@ package ru.nubby.pryanikitest.presentation.mvp;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -20,6 +22,14 @@ public class MainPresenter extends MvpPresenter<MainView> {
     private Repository mRepository;
     private BaseSchedulerProvider mSchedulerProvider;
     private CompositeDisposable mTasks;
+
+    /**
+     * Please note, that this list differs from the one we get from response.
+     * This will be displayed in our RecyclerView.
+     * Each element holds not just its Type, but also its Data value.
+     * This list will be reconstructed after each reload.
+     */
+    private List<TypedElement> mTypedElements = new ArrayList<>();
 
 
     public MainPresenter() {
@@ -44,20 +54,34 @@ public class MainPresenter extends MvpPresenter<MainView> {
         mTasks.add(mRepository.getData()
                 .subscribeOn(mSchedulerProvider.io())
                 .observeOn(mSchedulerProvider.ui())
-                .doOnSubscribe(result -> getViewState().showRefreshing())
+                .doOnSubscribe(result -> {
+                    mTypedElements = new ArrayList<>();
+                    getViewState().showRefreshing();
+                })
                 .subscribe(
                         result -> {
                             Map<Type, Data> mappedData = new HashMap<>();
                             for (TypedElement element: result.getData()) {
                                 mappedData.put(element.getName(), element.getData());
                             }
-                            getViewState().setTypeList(mappedData);
-                            getViewState().setDisplayList(result.getView());
+                            for (Type type: result.getView()) {
+                                TypedElement newElement = new TypedElement();
+                                newElement.setData(new Data(mappedData.get(type)));
+                                newElement.setName(type);
+                                mTypedElements.add(newElement);
+                            }
+                            getViewState().setDisplayList(mTypedElements);
                             getViewState().hideRefreshing();
                         },
                         error -> {
-                            getViewState().showError("Error while loading");
+                            getViewState().showMessage("Error while loading");
                             getViewState().hideRefreshing();
                         }));
+    }
+
+    @Override
+    public void onDestroy() {
+        mTasks.dispose();
+        super.onDestroy();
     }
 }

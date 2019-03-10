@@ -6,11 +6,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import ru.nubby.pryanikitest.model.Data;
 
-public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
+public abstract class BaseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    protected Data mData;
 
     public BaseViewHolder(@NonNull View itemView) {
         super(itemView);
     }
 
-    public abstract void setData(Data data);
+    public void setData(Data data) {
+        mData = data;
+    };
 }

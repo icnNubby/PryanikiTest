@@ -10,6 +10,13 @@ public class Variant {
     @SerializedName("text")
     private String text;
 
+    public Variant(Variant variant) {
+        if (variant != null) {
+            this.id = variant.getId();
+            this.text = variant.getText();
+        }
+    }
+
     public Integer getId() {
         return id;
     }

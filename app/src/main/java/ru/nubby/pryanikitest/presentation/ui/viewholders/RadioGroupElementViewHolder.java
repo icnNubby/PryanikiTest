@@ -14,11 +14,10 @@ import androidx.annotation.NonNull;
 import ru.nubby.pryanikitest.R;
 import ru.nubby.pryanikitest.model.Data;
 import ru.nubby.pryanikitest.model.Variant;
-import ru.nubby.pryanikitest.presentation.ui.viewholders.BaseViewHolder;
 
 public class RadioGroupElementViewHolder extends BaseViewHolder {
 
-    private final List<RadioButton> mRadioButtons = new ArrayList<>();
+    private List<RadioButton> mRadioButtons = new ArrayList<>();
 
     //In case if incoming id's does not match natural order, or skips some indices, etc.
     private Map<Integer, Integer> mIndicesMapping = new HashMap<>();
@@ -26,6 +25,8 @@ public class RadioGroupElementViewHolder extends BaseViewHolder {
 
     private RadioGroup mRadioGroup;
     private Context mContext;
+
+    private int mSelectedId;
 
     public RadioGroupElementViewHolder(@NonNull View itemView, Context context) {
         super(itemView);
@@ -35,7 +36,9 @@ public class RadioGroupElementViewHolder extends BaseViewHolder {
 
     @Override
     public void setData(Data data) {
+        super.setData(data);
         mIndicesMapping = new HashMap<>();
+        mRadioButtons = new ArrayList<>();
         mVariants = data.getVariants();
         mRadioGroup.removeAllViews();
         int i = 0;
@@ -45,10 +48,19 @@ public class RadioGroupElementViewHolder extends BaseViewHolder {
             mRadioButtons.add(button);
             mRadioGroup.addView(button);
             button.setText(variant.getText());
+            button.setOnClickListener(v -> {
+                mData.setSelectedId(variant.getId());
+            });
         }
-        Integer index = mIndicesMapping.get(data.getSelectedId());
+        mSelectedId = data.getSelectedId();
+        Integer index = mIndicesMapping.get(mSelectedId);
         if (index != null) {
             ((RadioButton) mRadioGroup.getChildAt(index)).setChecked(true);
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

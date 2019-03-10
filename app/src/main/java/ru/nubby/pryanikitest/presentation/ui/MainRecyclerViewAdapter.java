@@ -6,15 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import ru.nubby.pryanikitest.R;
-import ru.nubby.pryanikitest.model.Data;
-import ru.nubby.pryanikitest.model.Type;
+import ru.nubby.pryanikitest.model.TypedElement;
 import ru.nubby.pryanikitest.presentation.ui.viewholders.BaseViewHolder;
 import ru.nubby.pryanikitest.presentation.ui.viewholders.PictureElementViewHolder;
 import ru.nubby.pryanikitest.presentation.ui.viewholders.RadioGroupElementViewHolder;
@@ -23,19 +20,13 @@ import ru.nubby.pryanikitest.presentation.ui.viewholders.TextElementViewHolder;
 public class MainRecyclerViewAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     private Context mContext;
-    private Map<Type, Data> mTypedElements = new HashMap<>();
-    private List<Type> mList = new ArrayList<>();
+    private List<TypedElement> mList = new ArrayList<>();
 
     MainRecyclerViewAdapter(Context context){
         mContext = context;
     }
 
-    public void setTypedElements(Map<Type, Data> typedElements) {
-        mTypedElements = typedElements;
-        notifyDataSetChanged();
-    }
-
-    public void setList(List<Type> typeList) {
+    public void setList(List<TypedElement> typeList) {
         mList = typeList;
         notifyDataSetChanged();
     }
@@ -77,13 +68,12 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<BaseViewHolder
 
     @Override
     public int getItemViewType(int position) {
-        return mList.get(position).ordinal();
+        return mList.get(position).getName().ordinal();
     }
 
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
-        Type type = mList.get(position);
-        holder.setData(mTypedElements.get(type));
+        holder.setData(mList.get(position).getData());
     }
 
     @Override
