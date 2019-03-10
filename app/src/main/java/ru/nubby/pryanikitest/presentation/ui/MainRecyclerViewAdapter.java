@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.arellomobile.mvp.MvpDelegate;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +21,19 @@ import ru.nubby.pryanikitest.presentation.ui.viewholders.TextElementViewHolder;
 
 public class MainRecyclerViewAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
+    private MvpDelegate<? extends MainRecyclerViewAdapter> mMvpDelegate;
+    private MvpDelegate<?> mParentDelegate;
+    private String mChildId;
+
     private Context mContext;
     private List<TypedElement> mList = new ArrayList<>();
 
-    MainRecyclerViewAdapter(Context context){
+    MainRecyclerViewAdapter(Context context, MvpDelegate<?> parentDelegate){
         mContext = context;
+        mParentDelegate = parentDelegate;
+        mChildId = String.valueOf(0);
+
+        getMvpDelegate().onCreate();
     }
 
     public void setList(List<TypedElement> typeList) {
@@ -40,25 +50,25 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<BaseViewHolder
             case 0: {
                 view = LayoutInflater.from(mContext)
                         .inflate(R.layout.text_item, parent, false);
-                newViewHolder = new TextElementViewHolder(view);
+                newViewHolder = new TextElementViewHolder(view, mContext, this);
                 break;
             }
             case 1: {
                 view = LayoutInflater.from(mContext)
                         .inflate(R.layout.picture_item, parent, false);
-                newViewHolder = new PictureElementViewHolder(view);
+                newViewHolder = new PictureElementViewHolder(view, mContext, this);
                 break;
             }
             case 2: {
                 view = LayoutInflater.from(mContext)
                         .inflate(R.layout.selection_item, parent, false);
-                newViewHolder = new RadioGroupElementViewHolder(view, mContext);
+                newViewHolder = new RadioGroupElementViewHolder(view, mContext, this);
                 break;
             }
             default: {
                 view = LayoutInflater.from(mContext)
                         .inflate(R.layout.text_item, parent, false);
-                newViewHolder = new TextElementViewHolder(view);
+                newViewHolder = new TextElementViewHolder(view, mContext, this);
                 break;
             }
         }
@@ -73,7 +83,8 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<BaseViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
-        holder.setData(mList.get(position).getData());
+        TypedElement item = mList.get(position);
+        holder.bind(item);
     }
 
     @Override
@@ -82,4 +93,12 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<BaseViewHolder
     }
 
 
+    public MvpDelegate getMvpDelegate() {
+        if (mMvpDelegate == null) {
+            mMvpDelegate = new MvpDelegate<>(this);
+            mMvpDelegate.setParentDelegate(mParentDelegate, mChildId);
+
+        }
+        return mMvpDelegate;
+    }
 }

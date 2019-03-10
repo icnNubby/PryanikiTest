@@ -13,7 +13,9 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 import ru.nubby.pryanikitest.R;
 import ru.nubby.pryanikitest.model.Data;
+import ru.nubby.pryanikitest.model.TypedElement;
 import ru.nubby.pryanikitest.model.Variant;
+import ru.nubby.pryanikitest.presentation.ui.MainRecyclerViewAdapter;
 
 public class RadioGroupElementViewHolder extends BaseViewHolder {
 
@@ -28,18 +30,20 @@ public class RadioGroupElementViewHolder extends BaseViewHolder {
 
     private int mSelectedId;
 
-    public RadioGroupElementViewHolder(@NonNull View itemView, Context context) {
-        super(itemView);
+    public RadioGroupElementViewHolder(@NonNull View itemView,
+                                       Context context,
+                                       MainRecyclerViewAdapter adapter) {
+        super(itemView, context, adapter);
         mRadioGroup = itemView.findViewById(R.id.radio_group);
         mContext = context;
     }
 
     @Override
-    public void setData(Data data) {
-        super.setData(data);
+    public void bind(TypedElement element) {
+        super.bind(element);
         mIndicesMapping = new HashMap<>();
         mRadioButtons = new ArrayList<>();
-        mVariants = data.getVariants();
+        mVariants = element.getData().getVariants();
         mRadioGroup.removeAllViews();
         int i = 0;
         for (Variant variant: mVariants) {
@@ -50,9 +54,10 @@ public class RadioGroupElementViewHolder extends BaseViewHolder {
             button.setText(variant.getText());
             button.setOnClickListener(v -> {
                 mData.setSelectedId(variant.getId());
+                mItemPresenter.variantSelected(variant);
             });
         }
-        mSelectedId = data.getSelectedId();
+        mSelectedId = element.getData().getSelectedId();
         Integer index = mIndicesMapping.get(mSelectedId);
         if (index != null) {
             ((RadioButton) mRadioGroup.getChildAt(index)).setChecked(true);

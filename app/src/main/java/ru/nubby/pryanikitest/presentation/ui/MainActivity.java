@@ -31,7 +31,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         setContentView(R.layout.activity_main);
 
         mRecyclerView = findViewById(R.id.item_list_recycler_view);
-        mRecyclerViewAdapter = new MainRecyclerViewAdapter(this);
+        mRecyclerViewAdapter = new MainRecyclerViewAdapter(this, getMvpDelegate());
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
