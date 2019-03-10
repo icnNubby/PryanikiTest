@@ -1,7 +1,7 @@
 package ru.nubby.pryanikitest;
 
-import ru.nubby.pryanikitest.domain.RemoteApi;
-import ru.nubby.pryanikitest.domain.RemoteRepository;
+import ru.nubby.pryanikitest.domain.remote.RemoteApi;
+import ru.nubby.pryanikitest.domain.remote.RemoteRepository;
 import ru.nubby.pryanikitest.domain.Repository;
 import ru.nubby.pryanikitest.util.BaseSchedulerProvider;
 import ru.nubby.pryanikitest.util.SchedulerProvider;

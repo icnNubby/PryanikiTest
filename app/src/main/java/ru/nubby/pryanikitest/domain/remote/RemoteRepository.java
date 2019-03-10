@@ -1,11 +1,13 @@
-package ru.nubby.pryanikitest.domain;
+package ru.nubby.pryanikitest.domain.remote;
 
 import io.reactivex.Single;
+import ru.nubby.pryanikitest.domain.Repository;
 import ru.nubby.pryanikitest.model.ViewElementList;
 
 public class RemoteRepository implements Repository {
 
     private final RemoteApi mRemoteApi;
+    private final String TEST_DATA = "tmp/JSONSample.json";
 
     public RemoteRepository(RemoteApi remoteApi){
         mRemoteApi = remoteApi;
@@ -15,6 +17,6 @@ public class RemoteRepository implements Repository {
     public Single<ViewElementList> getData() {
         return mRemoteApi
                 .getExampleService()
-                .getViewElements();
+                .getViewElements(TEST_DATA);
     }
 }

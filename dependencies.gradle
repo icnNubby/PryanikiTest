@@ -42,6 +42,7 @@ ext {
             constraint: "androidx.constraintlayout:constraintlayout:$constraint_version",
             //net
             okhttp: "com.squareup.okhttp3:okhttp:$okhttp_version",
+            okhttp_logging: "com.squareup.okhttp3:logging-interceptor:$okhttp_version",
             retrofit: "com.squareup.retrofit2:retrofit:$retrofit_version",
             retrofit_converter_gson: "com.squareup.retrofit2:converter-gson:$retrofit_version",
             retrofit_converter_scalar: "com.squareup.retrofit2:converter-scalars:$retrofit_version",
