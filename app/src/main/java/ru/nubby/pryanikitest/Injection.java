@@ -3,6 +3,7 @@ package ru.nubby.pryanikitest;
 import ru.nubby.pryanikitest.domain.remote.RemoteApi;
 import ru.nubby.pryanikitest.domain.remote.RemoteRepository;
 import ru.nubby.pryanikitest.domain.Repository;
+import ru.nubby.pryanikitest.domain.test.TestRepository;
 import ru.nubby.pryanikitest.util.BaseSchedulerProvider;
 import ru.nubby.pryanikitest.util.SchedulerProvider;
 
@@ -18,6 +19,10 @@ public class Injection {
 
     public static BaseSchedulerProvider provideSchedulerProvider() {
         return SchedulerProvider.getInstance();
+    }
+
+    public static Repository provideTestRepository() {
+        return new TestRepository();
     }
 
 }

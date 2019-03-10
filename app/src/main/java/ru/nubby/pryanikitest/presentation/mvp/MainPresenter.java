@@ -25,7 +25,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
     public MainPresenter() {
         super();
 
-        mRepository = Injection.provideRepository();
+        mRepository = Injection.provideTestRepository(); // TODO change for prod
         mSchedulerProvider = Injection.provideSchedulerProvider();
 
         mTasks = new CompositeDisposable();

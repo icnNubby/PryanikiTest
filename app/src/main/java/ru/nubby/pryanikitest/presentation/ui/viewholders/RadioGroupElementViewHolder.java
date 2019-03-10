@@ -37,6 +37,7 @@ public class RadioGroupElementViewHolder extends BaseViewHolder {
     public void setData(Data data) {
         mIndicesMapping = new HashMap<>();
         mVariants = data.getVariants();
+        mRadioGroup.removeAllViews();
         int i = 0;
         for (Variant variant: mVariants) {
             RadioButton button = new RadioButton(mContext);
