@@ -1,0 +1,53 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "ru.nubby.pryanikitest"
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+}
+
+dependencies {
+
+    def dependencies = rootProject.ext.app_dependencies
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation dependencies.appcompat
+    implementation dependencies.design
+
+    implementation dependencies.okhttp
+    implementation dependencies.constraint
+    implementation dependencies.rxandroid
+    implementation dependencies.rxjava
+
+    implementation dependencies.retrofit
+    implementation dependencies.retrofit_converter_gson
+    implementation dependencies.retrofit_converter_scalar
+    implementation dependencies.retrofit_rxjava_adapter
+    implementation dependencies.gson
+    implementation dependencies.picasso
+
+    implementation dependencies.moxy
+    implementation dependencies.moxy_appcompat
+
+    annotationProcessor dependencies.moxy_annotations
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
