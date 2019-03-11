@@ -5,17 +5,17 @@ import com.google.gson.annotations.SerializedName;
 public class TypedElement {
 
     @SerializedName("name")
-    private Type name = null;
+    private Type type = null;
 
     @SerializedName("data")
     private Data data;
 
-    public Type getName() {
-        return name;
+    public Type getType() {
+        return type;
     }
 
-    public void setName(Type name) {
-        this.name = name;
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public Data getData() {

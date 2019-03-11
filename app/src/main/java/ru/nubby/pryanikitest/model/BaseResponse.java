@@ -9,7 +9,7 @@ public class BaseResponse {
     private List<TypedElement> data = null;
 
     @SerializedName("view")
-    private List<Type> view = null;
+    private List<Type> viewList = null;
 
     public List<TypedElement> getData() {
         return data;
@@ -19,12 +19,12 @@ public class BaseResponse {
         this.data = data;
     }
 
-    public List<Type> getView() {
-        return view;
+    public List<Type> getViewList() {
+        return viewList;
     }
 
-    public void setView(List<Type> view) {
-        this.view = view;
+    public void setViewList(List<Type> viewList) {
+        this.viewList = viewList;
     }
 
 }

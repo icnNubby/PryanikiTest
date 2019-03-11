@@ -65,12 +65,12 @@ public class MainPresenter extends MvpPresenter<MainView> {
                         result -> {
                             Map<Type, Data> mappedData = new HashMap<>();
                             for (TypedElement element: result.getData()) {
-                                mappedData.put(element.getName(), element.getData());
+                                mappedData.put(element.getType(), element.getData());
                             }
-                            for (Type type: result.getView()) {
+                            for (Type type: result.getViewList()) {
                                 TypedElement newElement = new TypedElement();
                                 newElement.setData(new Data(mappedData.get(type)));
-                                newElement.setName(type);
+                                newElement.setType(type);
                                 mTypedElements.add(newElement);
                             }
                             getViewState().setDisplayList(mTypedElements);

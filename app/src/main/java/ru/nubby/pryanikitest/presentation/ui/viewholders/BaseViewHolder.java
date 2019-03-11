@@ -51,7 +51,7 @@ public abstract class BaseViewHolder extends RecyclerView.ViewHolder
             mMvpDelegate = null;
         }
         mData = element.getData();
-        mType = element.getName();
+        mType = element.getType();
         getMvpDelegate().onCreate();
         getMvpDelegate().onAttach();
     }

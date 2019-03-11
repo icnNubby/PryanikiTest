@@ -78,7 +78,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<BaseViewHolder
 
     @Override
     public int getItemViewType(int position) {
-        return mList.get(position).getName().ordinal();
+        return mList.get(position).getType().ordinal();
     }
 
     @Override
