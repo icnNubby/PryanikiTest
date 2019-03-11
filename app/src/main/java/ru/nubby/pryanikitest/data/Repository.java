@@ -1,4 +1,4 @@
-package ru.nubby.pryanikitest.domain;
+package ru.nubby.pryanikitest.data;
 
 import io.reactivex.Single;
 import ru.nubby.pryanikitest.model.BaseResponse;

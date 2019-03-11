@@ -1,10 +1,11 @@
-package ru.nubby.pryanikitest.presentation.mvp;
+package ru.nubby.pryanikitest.presentation.mvp.presenters;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
 import ru.nubby.pryanikitest.model.Type;
 import ru.nubby.pryanikitest.model.Variant;
+import ru.nubby.pryanikitest.presentation.mvp.views.ItemView;
 
 @InjectViewState
 public class ItemPresenter extends MvpPresenter<ItemView> {

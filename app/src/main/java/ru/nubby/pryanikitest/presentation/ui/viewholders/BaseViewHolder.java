@@ -13,15 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import ru.nubby.pryanikitest.model.Data;
 import ru.nubby.pryanikitest.model.Type;
 import ru.nubby.pryanikitest.model.TypedElement;
-import ru.nubby.pryanikitest.presentation.mvp.ItemPresenter;
-import ru.nubby.pryanikitest.presentation.mvp.ItemView;
+import ru.nubby.pryanikitest.presentation.mvp.presenters.ItemPresenter;
+import ru.nubby.pryanikitest.presentation.mvp.views.ItemView;
 import ru.nubby.pryanikitest.presentation.ui.MainRecyclerViewAdapter;
 
 public abstract class BaseViewHolder extends RecyclerView.ViewHolder
         implements View.OnClickListener, ItemView {
-    protected Data mData;
-    protected Type mType;
-    protected Context mContext;
+
+    Data mData;
+    private Type mType;
+    private Context mContext;
 
     private MvpDelegate mMvpDelegate;
 
@@ -65,7 +66,7 @@ public abstract class BaseViewHolder extends RecyclerView.ViewHolder
         Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
     }
 
-    MvpDelegate getMvpDelegate() {
+    private MvpDelegate getMvpDelegate() {
         if (mData == null) {
             return null;
         }

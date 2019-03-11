@@ -13,12 +13,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import ru.nubby.pryanikitest.R;
 import ru.nubby.pryanikitest.model.TypedElement;
 import ru.nubby.pryanikitest.presentation.MvpAppCompatActivity;
-import ru.nubby.pryanikitest.presentation.mvp.MainPresenter;
-import ru.nubby.pryanikitest.presentation.mvp.MainView;
+import ru.nubby.pryanikitest.presentation.mvp.presenters.MainPresenter;
+import ru.nubby.pryanikitest.presentation.mvp.views.MainView;
 
 public class MainActivity extends MvpAppCompatActivity implements MainView {
 
-    private RecyclerView mRecyclerView;
     private MainRecyclerViewAdapter mRecyclerViewAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -30,10 +29,10 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mRecyclerView = findViewById(R.id.item_list_recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.item_list_recycler_view);
         mRecyclerViewAdapter = new MainRecyclerViewAdapter(this, getMvpDelegate());
-        mRecyclerView.setAdapter(mRecyclerViewAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(mRecyclerViewAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mSwipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setOnRefreshListener(() -> mMainPresenter.loadNewItems());

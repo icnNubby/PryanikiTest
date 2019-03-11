@@ -1,9 +1,9 @@
 package ru.nubby.pryanikitest;
 
-import ru.nubby.pryanikitest.domain.remote.RemoteApi;
-import ru.nubby.pryanikitest.domain.remote.RemoteRepository;
-import ru.nubby.pryanikitest.domain.Repository;
-import ru.nubby.pryanikitest.domain.test.TestRepository;
+import ru.nubby.pryanikitest.data.remote.RemoteApi;
+import ru.nubby.pryanikitest.data.remote.RemoteRepository;
+import ru.nubby.pryanikitest.data.Repository;
+import ru.nubby.pryanikitest.data.test.TestRepository;
 import ru.nubby.pryanikitest.util.BaseSchedulerProvider;
 import ru.nubby.pryanikitest.util.SchedulerProvider;
 

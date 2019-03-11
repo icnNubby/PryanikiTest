@@ -1,7 +1,7 @@
-package ru.nubby.pryanikitest.domain.remote;
+package ru.nubby.pryanikitest.data.remote;
 
 import io.reactivex.Single;
-import ru.nubby.pryanikitest.domain.Repository;
+import ru.nubby.pryanikitest.data.Repository;
 import ru.nubby.pryanikitest.model.BaseResponse;
 
 public class RemoteRepository implements Repository {

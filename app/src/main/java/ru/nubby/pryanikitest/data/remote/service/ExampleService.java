@@ -1,4 +1,4 @@
-package ru.nubby.pryanikitest.domain.remote.service;
+package ru.nubby.pryanikitest.data.remote.service;
 
 import io.reactivex.Single;
 import retrofit2.http.GET;

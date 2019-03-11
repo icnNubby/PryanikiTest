@@ -1,4 +1,4 @@
-package ru.nubby.pryanikitest.presentation.mvp;
+package ru.nubby.pryanikitest.presentation.mvp.presenters;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -10,10 +10,11 @@ import java.util.Map;
 
 import io.reactivex.disposables.CompositeDisposable;
 import ru.nubby.pryanikitest.Injection;
-import ru.nubby.pryanikitest.domain.Repository;
+import ru.nubby.pryanikitest.data.Repository;
 import ru.nubby.pryanikitest.model.Data;
 import ru.nubby.pryanikitest.model.Type;
 import ru.nubby.pryanikitest.model.TypedElement;
+import ru.nubby.pryanikitest.presentation.mvp.views.MainView;
 import ru.nubby.pryanikitest.util.BaseSchedulerProvider;
 
 @InjectViewState
@@ -35,7 +36,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
     public MainPresenter() {
         super();
 
-        mRepository = Injection.provideTestRepository(); // TODO change for prod
+        mRepository = Injection.provideRepository();
         mSchedulerProvider = Injection.provideSchedulerProvider();
 
         mTasks = new CompositeDisposable();
@@ -57,6 +58,8 @@ public class MainPresenter extends MvpPresenter<MainView> {
                 .doOnSubscribe(result -> {
                     mTypedElements = new ArrayList<>();
                     getViewState().showRefreshing();
+                    //actually its better to show progressbar inside of recyclerview
+                    //current implementation is cheap and might be rewritten
                 })
                 .subscribe(
                         result -> {
@@ -74,7 +77,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
                             getViewState().hideRefreshing();
                         },
                         error -> {
-                            getViewState().showMessage("Error while loading");
+                            getViewState().showMessage("Can't fetch data. Try again later please.");
                             getViewState().hideRefreshing();
                         }));
     }

@@ -5,30 +5,20 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
 import ru.nubby.pryanikitest.R;
-import ru.nubby.pryanikitest.model.Data;
 import ru.nubby.pryanikitest.model.TypedElement;
 import ru.nubby.pryanikitest.model.Variant;
 import ru.nubby.pryanikitest.presentation.ui.MainRecyclerViewAdapter;
 
 public class RadioGroupElementViewHolder extends BaseViewHolder {
 
-    private List<RadioButton> mRadioButtons = new ArrayList<>();
-
-    //In case if incoming id's does not match natural order, or skips some indices, etc.
-    private Map<Integer, Integer> mIndicesMapping = new HashMap<>();
-    private List<Variant> mVariants;
-
     private RadioGroup mRadioGroup;
     private Context mContext;
-
-    private int mSelectedId;
 
     public RadioGroupElementViewHolder(@NonNull View itemView,
                                        Context context,
@@ -41,15 +31,14 @@ public class RadioGroupElementViewHolder extends BaseViewHolder {
     @Override
     public void bind(TypedElement element) {
         super.bind(element);
-        mIndicesMapping = new HashMap<>();
-        mRadioButtons = new ArrayList<>();
-        mVariants = element.getData().getVariants();
+        //In case if incoming id's does not match natural order, or skips some indices, etc.
+        Map<Integer, Integer> indicesMapping = new HashMap<>();
+        List<Variant> variants = element.getData().getVariants();
         mRadioGroup.removeAllViews();
         int i = 0;
-        for (Variant variant: mVariants) {
+        for (Variant variant: variants) {
             RadioButton button = new RadioButton(mContext);
-            mIndicesMapping.put(variant.getId(), i++);
-            mRadioButtons.add(button);
+            indicesMapping.put(variant.getId(), i++);
             mRadioGroup.addView(button);
             button.setText(variant.getText());
             button.setOnClickListener(v -> {
@@ -57,8 +46,8 @@ public class RadioGroupElementViewHolder extends BaseViewHolder {
                 mItemPresenter.variantSelected(variant);
             });
         }
-        mSelectedId = element.getData().getSelectedId();
-        Integer index = mIndicesMapping.get(mSelectedId);
+        int selectedId = element.getData().getSelectedId();
+        Integer index = indicesMapping.get(selectedId);
         if (index != null) {
             ((RadioButton) mRadioGroup.getChildAt(index)).setChecked(true);
         }
@@ -66,6 +55,6 @@ public class RadioGroupElementViewHolder extends BaseViewHolder {
 
     @Override
     public void onClick(View v) {
-
+        //should be empty, otherwise it will notify about clicking in radio group area
     }
 }

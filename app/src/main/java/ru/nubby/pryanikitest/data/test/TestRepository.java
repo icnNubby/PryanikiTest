@@ -1,18 +1,18 @@
-package ru.nubby.pryanikitest.domain.test;
+package ru.nubby.pryanikitest.data.test;
 
 import com.google.gson.Gson;
 
 import io.reactivex.Single;
-import ru.nubby.pryanikitest.domain.Repository;
+import ru.nubby.pryanikitest.data.Repository;
 import ru.nubby.pryanikitest.model.BaseResponse;
 
 public class TestRepository implements Repository {
-    private final String JSON = "{\n" +
+    private final String TEST_JSON = "{\n" +
             "  \"data\": [\n" +
             "    {\n" +
             "      \"name\": \"hz\",\n" +
             "      \"data\": {\n" +
-            "        \"text\": \"тринитротолуол\"\n" +
+            "        \"text\": \"Тринитротолуол\"\n" +
             "      }\n" +
             "    },\n" +
             "    {\n" +
@@ -68,7 +68,7 @@ public class TestRepository implements Repository {
 
     @Override
     public Single<BaseResponse> getData() {
-        BaseResponse response = new Gson().fromJson(JSON, BaseResponse.class);
+        BaseResponse response = new Gson().fromJson(TEST_JSON, BaseResponse.class);
         return Single.just(response);
     }
 }
